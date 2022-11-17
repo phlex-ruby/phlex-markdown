@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require "phlex"
 require "markly"
 
 module Phlex
 	class Markdown < Phlex::HTML
+		VERSION = "0.1.0"
+
 		def initialize(content)
 			@content = content
 		end
