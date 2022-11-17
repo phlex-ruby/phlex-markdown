@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "lib/phlex/markdown"
-
 Gem::Specification.new do |spec|
 	spec.name = "phlex-markdown"
-	spec.version = Phlex::Markdown::VERSION
+	spec.version = "0.1.0"
 	spec.authors = ["Joel Drapper"]
 	spec.email = ["joel@drapper.me"]
 

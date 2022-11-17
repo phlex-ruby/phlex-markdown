@@ -5,8 +5,6 @@ require "markly"
 
 module Phlex
 	class Markdown < Phlex::HTML
-		VERSION = "0.1.0"
-
 		def initialize(content)
 			@content = content
 		end
@@ -47,7 +45,13 @@ module Phlex
 					p { visit_children(node) }
 				end
 			in :link
-				a(href: node.url) { visit_children(node) }
+				a(href: node.url, title: node.title) { visit_children(node) }
+			in :image
+				img(
+					src: node.url,
+					alt: node.each.first.string_content,
+					title: node.title
+				)
 			in :emph
 				em { visit_children(node) }
 			in :strong
@@ -60,10 +64,14 @@ module Phlex
 			in :list_item
 				li { visit_children(node) }
 			in :code
-				whitespace { code { text(node.string_content) } }
+				code { text(node.string_content) }
 			in :code_block
 				code_block(node.string_content, language: node.fence_info) do |**attributes|
-					pre(**attributes) { text(node.string_content) }
+					pre(**attributes) do
+						code(class: "language-#{node.fence_info}") do
+							text(node.string_content)
+						end
+					end
 				end
 			in :hrule
 				hr

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "phlex/markdown"
 
 describe Phlex::Markdown do
@@ -24,6 +26,70 @@ describe Phlex::Markdown do
 
 		expect(output).to be ==
 			"<ol><li>One</li><li>Two</li><li>Three</li></ol>"
+	end
+
+	it "supports unordered lists" do
+		output = md <<~MD
+			- One
+			- Two
+			- Three
+		MD
+
+		expect(output).to be ==
+			"<ul><li>One</li><li>Two</li><li>Three</li></ul>"
+	end
+
+	it "supports inline code" do
+		output = md "Some `code` here"
+		expect(output).to be == "<p>Some <code>code</code> here</p>"
+	end
+
+	it "supports block code" do
+		output = md <<~MD
+			```ruby
+			def foo
+				bar
+			end
+			```
+		MD
+
+		expect(output).to be ==
+			%(<pre><code class="language-ruby">def foo\n\tbar\nend\n</code></pre>)
+	end
+
+	it "supports paragraphs" do
+		output = md "A\n\nB"
+		expect(output).to be == "<p>A</p><p>B</p>"
+	end
+
+	it "supports links" do
+		output = md "[Hello](world 'title')"
+		expect(output).to be == %(<p><a href="world" title="title">Hello</a></p>)
+	end
+
+	it "supports emphasis" do
+		output = md "*Hello*"
+		expect(output).to be == "<p><em>Hello</em></p>"
+	end
+
+	it "supports strong" do
+		output = md "**Hello**"
+		expect(output).to be == "<p><strong>Hello</strong></p>"
+	end
+
+	it "supports blockquotes" do
+		output = md "> Hello"
+		expect(output).to be == "<blockquote><p>Hello</p></blockquote>"
+	end
+
+	it "supports horizontal rules" do
+		output = md "---"
+		expect(output).to be == "<hr>"
+	end
+
+	it "supports images" do
+		output = md "![alt](src 'title')"
+		expect(output).to be == %(<p><img src="src" alt="alt" title="title"></p>)
 	end
 
 	def md(content)
