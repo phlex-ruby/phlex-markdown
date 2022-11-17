@@ -1,8 +1,10 @@
 # `phlex-markdown`
 
-`Phlex::Markdown` is a [Phlex](https://phlex.fun) view that renders Markdown into HTML using Phlex. That means, you can define a class that inherits from `Phlex::Markdown` and override various methods to customise the output.
+`Phlex::Markdown` is a [Phlex](https://phlex.fun) view that renders Markdown into HTML using Phlex. You could use it directly — it takes a String of markdown and renders it to safe HTML.
 
-For example, here we override `h1` and `ul`, adding some Tailwind classes.
+Alternatively, you can define a sub-class and override various methods to customise the output.
+
+For example, here we override `h1` and `ul`, adding some Tailwind classes to them.
 
 ```ruby
 class MyMarkdown < Phlex::Markdown
@@ -11,7 +13,7 @@ class MyMarkdown < Phlex::Markdown
 end
 ```
 
-When can render this view with some Markdown.
+When we render the view.
 
 ```ruby
 content = <<~MD
@@ -25,7 +27,7 @@ MD
 output = MyMarkdown.new(content).call
 ```
 
-And `output` will be
+The `output` will use the attributes from our methods.
 
 ```html
 <h1 class="font-bold text-xl">Hello World</h1>
@@ -36,7 +38,7 @@ And `output` will be
 </ul>
 ```
 
-You could also wrap the whole document in `<article class="prose"></article>`.
+You could also wrap the whole document in an `<article>` element by overriding `template`.
 
 ```ruby
 class MyMarkdownArticle < Phlex::Markdown
