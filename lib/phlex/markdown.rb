@@ -64,7 +64,9 @@ module Phlex
 			in :list_item
 				li { visit_children(node) }
 			in :code
-				code { text(node.string_content) }
+				inline_code do |**attributes|
+					code(**attributes) { text(node.string_content) }
+				end
 			in :code_block
 				code_block(node.string_content, language: node.fence_info) do |**attributes|
 					pre(**attributes) do
@@ -78,6 +80,10 @@ module Phlex
 			in :blockquote
 				blockquote { visit_children(node) }
 			end
+		end
+
+		def inline_code(**attributes)
+			yield(**attributes)
 		end
 
 		def code_block(code, language:)
