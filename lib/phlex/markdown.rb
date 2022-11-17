@@ -68,7 +68,7 @@ module Phlex
 					code(**attributes) { text(node.string_content) }
 				end
 			in :code_block
-				code_block(node.string_content, language: node.fence_info) do |**attributes|
+				code_block(node.string_content, node.fence_info) do |**attributes|
 					pre(**attributes) do
 						code(class: "language-#{node.fence_info}") do
 							text(node.string_content)
@@ -86,8 +86,8 @@ module Phlex
 			yield(**attributes)
 		end
 
-		def code_block(code, language:)
-			yield
+		def code_block(code, language, **attributes)
+			yield(**attributes)
 		end
 
 		def visit_children(node)
