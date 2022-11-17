@@ -36,6 +36,16 @@ And `output` will be
 </ul>
 ```
 
+You could also wrap the whole document in `<article class="prose"></article>`.
+
+```ruby
+class MyMarkdownArticle < Phlex::Markdown
+  def template
+    article(class: "prose") { super }
+  end
+end
+```
+
 ### Community 🙌
 
 Everyone interacting in Phlex codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/joeldrapper/phlex/blob/main/CODE_OF_CONDUCT.md).
