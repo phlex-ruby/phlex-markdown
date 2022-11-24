@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
 	spec.name = "phlex-markdown"
-	spec.version = "0.2.0"
+	spec.version = "0.3.0"
 	spec.authors = ["Joel Drapper"]
 	spec.email = ["joel@drapper.me"]
 
@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
 	spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
 	spec.require_paths = ["lib"]
 
-	spec.add_dependency "markly"
-	spec.add_dependency "phlex"
+	spec.add_dependency "markly", "~> 0.7"
+	spec.add_dependency "phlex", ">= 0.5"
 
 	spec.metadata["rubygems_mfa_required"] = "true"
 end
