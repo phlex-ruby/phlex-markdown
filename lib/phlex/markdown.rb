@@ -25,9 +25,9 @@ module Phlex
 			case node.type
 			in :document
 				visit_children(node)
-      in :softbreak
-        text(" ")
-        visit_children(node)
+			in :softbreak
+				text(" ")
+				visit_children(node)
 			in :text
 				text(node.string_content)
 			in :header

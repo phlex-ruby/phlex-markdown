@@ -92,6 +92,17 @@ describe Phlex::Markdown do
 		expect(output).to be == %(<p><img src="src" alt="alt" title="title"></p>)
 	end
 
+	it "supports softbreaks in content as spaces" do
+		output = md <<~MD
+			One
+			Two
+
+			Three
+		MD
+
+		expect(output).to be == "<p>One Two</p><p>Three</p>"
+	end
+
 	def md(content)
 		Phlex::Markdown.new(content).call
 	end
