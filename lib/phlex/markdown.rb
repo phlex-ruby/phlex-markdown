@@ -26,7 +26,7 @@ module Phlex
 			in :document
 				visit_children(node)
 			in :softbreak
-				text(" ")
+				whitespace
 				visit_children(node)
 			in :text
 				text(node.string_content)
