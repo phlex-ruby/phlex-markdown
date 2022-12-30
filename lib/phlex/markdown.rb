@@ -23,7 +23,10 @@ module Phlex
 			return if node.nil?
 
 			case node.type
-			in :document | :softbreak
+			in :document
+				visit_children(node)
+			in :softbreak
+				whitespace
 				visit_children(node)
 			in :text
 				text(node.string_content)
