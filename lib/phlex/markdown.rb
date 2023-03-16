@@ -29,7 +29,7 @@ module Phlex
 				whitespace
 				visit_children(node)
 			in :text
-				text(node.string_content)
+				plain(node.string_content)
 			in :header
 				case node.header_level
 					in 1 then h1 { visit_children(node) }
@@ -68,7 +68,7 @@ module Phlex
 				li { visit_children(node) }
 			in :code
 				inline_code do |**attributes|
-					code(**attributes) { text(node.string_content) }
+					code(**attributes) { plain(node.string_content) }
 				end
 			in :code_block
 				code_block(node.string_content, node.fence_info) do |**attributes|
