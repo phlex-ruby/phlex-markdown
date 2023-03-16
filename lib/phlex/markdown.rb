@@ -74,7 +74,7 @@ module Phlex
 				code_block(node.string_content, node.fence_info) do |**attributes|
 					pre(**attributes) do
 						code(class: "language-#{node.fence_info}") do
-							text(node.string_content)
+							plain(node.string_content)
 						end
 					end
 				end
