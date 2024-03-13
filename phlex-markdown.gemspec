@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 	spec.require_paths = ["lib"]
 
 	spec.add_dependency "markly", "~> 0.7"
-	spec.add_dependency "phlex", ">= 0.5"
+	spec.add_dependency "phlex", ">= 1.10"
 
 	spec.metadata["rubygems_mfa_required"] = "true"
 end
