@@ -9,7 +9,7 @@ module Phlex
 			@content = content
 		end
 
-		def template
+		def view_template
 			visit(doc)
 		end
 
